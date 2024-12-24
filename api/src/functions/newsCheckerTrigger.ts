@@ -49,7 +49,7 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
     const openai = new OpenAI({apiKey: openApiKey});
 
     context.log("making request to OpenAI API");
-    
+
     const response = await openai.chat.completions.create({
         model: "gpt-4o",
         messages: [
@@ -72,7 +72,7 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
                 "content": [
                   {
                     "type": "text",
-                    "text": parsedBody
+                    "text": parsedBody.text
                   }
                 ]
             }
