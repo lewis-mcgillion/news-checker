@@ -12,6 +12,8 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
         };
     }
 
+    context.log(body)
+
     const keyVaultName = "news-checker";
     const secretName = "OpenAI-API-Key";
     const keyVaultUri = `https://${keyVaultName}.vault.azure.net`;
