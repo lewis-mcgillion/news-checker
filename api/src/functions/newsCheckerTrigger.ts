@@ -23,7 +23,7 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
         };
     }
 
-    context.log(body)
+    context.log("Request body:", parsedBody);
 
     const keyVaultName = "news-checker";
     const secretName = "OpenAI-API-Key";
@@ -48,6 +48,8 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
 
     const openai = new OpenAI({apiKey: openApiKey});
 
+    context.log("making request to OpenAI API");
+    
     const response = await openai.chat.completions.create({
         model: "gpt-4o",
         messages: [
