@@ -4,8 +4,19 @@ import { DefaultAzureCredential } from '@azure/identity';
 import { SecretClient } from '@azure/keyvault-secrets';
 
 export async function newsCheckerTrigger(request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> {
-    const body = request.body;
-    if (!body) {
+    const body: string = await request.text();
+
+    let parsedBody;
+    try {
+        parsedBody = JSON.parse(body);
+    } catch (error) {
+        return {
+            status: 400,
+            body: 'Invalid JSON in request body'
+        };
+    }
+
+    if (!parsedBody) {
         return {
             status: 400,
             body: "Request body is empty."
@@ -59,7 +70,7 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
                 "content": [
                   {
                     "type": "text",
-                    "text": body.toString()
+                    "text": parsedBody
                   }
                 ]
             }
