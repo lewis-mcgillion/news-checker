@@ -3,7 +3,7 @@ name: Deploy Node.js project to Azure Function App
 on:
     push:
       branches:
-        - master
+        - main
 
 env:
   AZURE_FUNCTIONAPP_NAME: 'news-checker'
