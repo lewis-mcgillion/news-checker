@@ -1,5 +1,7 @@
 import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/functions";
 import OpenAI from "openai";
+import { DefaultAzureCredential } from '@azure/identity';
+import { SecretClient } from '@azure/keyvault-secrets';
 
 export async function newsCheckerTrigger(request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> {
     const body = request.body;
@@ -10,7 +12,28 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
         };
     }
 
-    const openai = new OpenAI({apiKey: ""});
+    const keyVaultName = "news-checker";
+    const secretName = "OpenAI-API-Key";
+    const keyVaultUri = `https://${keyVaultName}.vault.azure.net`;
+
+    let openApiKey: string;
+    try{
+        const credential = new DefaultAzureCredential();
+        const client = new SecretClient(keyVaultUri, credential);
+
+        const secret = await client.getSecret(secretName);
+
+        openApiKey = secret.value;
+    } catch (error) {
+        context.log('Error retrieving OpenAI API key from Key Vault:', error);
+
+        return {
+            status: 500,
+            body: 'Failed to retrieve OpenAI API key.'
+        };
+    }
+
+    const openai = new OpenAI({apiKey: openApiKey});
 
     const response = await openai.chat.completions.create({
         model: "gpt-4o",
