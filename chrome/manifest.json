@@ -1,0 +1,12 @@
+{
+    "manifest_version": 3,
+    "name": "News Checker",
+    "version": "1.0",
+    "description": "Checks news articles for misleading content using AI",
+    "content_scripts": [
+        {
+            "matches": ["https://www.bbc.co.uk/news/articles/*"],
+            "js": ["scripts/content.js"]
+        }
+    ]
+  }
