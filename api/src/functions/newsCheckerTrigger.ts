@@ -6,7 +6,7 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
     if (!body) {
         return {
             status: 400,
-            body: "Request body is empty"
+            body: "Request body is empty."
         };
     }
 
