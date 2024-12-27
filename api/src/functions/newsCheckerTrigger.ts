@@ -91,7 +91,7 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
         ],
     });
 
-    context.log("response from OpenAI API:", response);
+    context.log("response from OpenAI API:", response.choices[0].message.content);
 
     return {
         body: JSON.stringify(response.choices[0].message.content)
