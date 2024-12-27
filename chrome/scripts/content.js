@@ -31,16 +31,19 @@ fetch('https://news-checker.azurewebsites.net/api/newsCheckerTrigger', {
             position: 'fixed',
             top: '25px',
             right: '25px',
-            backgroundColor: 'white',
+            backgroundColor: '#e8e8e8',
             zIndex: '1000',
-            border: '1px solid black',
+            border: '1px solid #333',
+            borderRadius: '10px',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
             padding: '10px',
             boxSizing: 'border-box',
             fontFamily: 'Helvetica, Arial, sans-serif',
         });
 
-        newDiv.innerHTML = "<h2>Analysis of this article by NewsCheckerAI</h2><br>" + data;
+        //chatgpt likes to respond with markdown
+        const cleanData = data.replace(/```html|```/g, '');
+        newDiv.innerHTML = "<h2>Analysis of this article by NewsCheckerAI</h2><br>" + cleanData;
 
         const closeButton = document.createElement('button');
         closeButton.innerText = 'x';
@@ -48,11 +51,18 @@ fetch('https://news-checker.azurewebsites.net/api/newsCheckerTrigger', {
             position: 'absolute',
             top: '-17.5px',
             left: '-17.5px',
-            background: 'transparent',
-            border: 'none',
-            fontSize: '25px',
-            fontweight: 'bold',
-            cursor: 'pointer'
+            width: '30px',
+            height: '30px',
+            background: 'white',
+            border: '1px solid black',
+            borderRadius: '50%',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
         });
 
         closeButton.addEventListener('click', () => {
