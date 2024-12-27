@@ -85,7 +85,7 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
 };
 
 app.http('newsCheckerTrigger', {
-    methods: ['GET', 'POST'],
+    methods: ['GET', 'POST', 'OPTIONS'],
     authLevel: 'anonymous',
     handler: newsCheckerTrigger
 });
