@@ -10,6 +10,7 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
     try {
         parsedBody = JSON.parse(body);
     } catch (error) {
+        context.log(error)
         return {
             status: 400,
             body: error
