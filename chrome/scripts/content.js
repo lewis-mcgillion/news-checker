@@ -23,6 +23,8 @@ fetch('https://news-checker.azurewebsites.net/api/newsCheckerTrigger', {
     .then(response => response.json())
     .then(data => {
         console.log(data);
+        const extensionBody = document.getElementById("news-checker-body")
+        extensionBody.innerHTML = data;
     })
     .catch((error) => {
         console.error('Error:', error);
