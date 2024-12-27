@@ -4,6 +4,17 @@ import { DefaultAzureCredential } from '@azure/identity';
 import { SecretClient } from '@azure/keyvault-secrets';
 
 export async function newsCheckerTrigger(request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> {
+    if (request.method === "OPTIONS") {
+        return {
+            status: 204,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization"
+            }
+        };
+    }
+    
     const body: string = await request.text();
 
     let parsedBody;
