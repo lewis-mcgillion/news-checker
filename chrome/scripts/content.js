@@ -13,7 +13,9 @@ else {
     });
 }
 
-fetch('https://news-checker.azurewebsites.net/api/newsCheckerTrigger', {
+const AZ_FUNCTION_URL = '';
+
+fetch(AZ_FUNCTION_URL, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
