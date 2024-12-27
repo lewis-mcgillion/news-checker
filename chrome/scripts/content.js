@@ -23,8 +23,45 @@ fetch('https://news-checker.azurewebsites.net/api/newsCheckerTrigger', {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        const extensionBody = document.getElementById("news-checker-body")
-        extensionBody.innerHTML = data;
+
+        const newDiv = document.createElement('div');
+        Object.assign(newDiv.style, {
+            width: '400px',
+            height: 'auto',
+            position: 'fixed',
+            top: '25px',
+            right: '25px',
+            backgroundColor: 'white',
+            zIndex: '1000',
+            border: '1px solid black',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            padding: '10px',
+            boxSizing: 'border-box',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+        });
+
+        newDiv.innerHTML = "<h2>Analysis of this article by NewsCheckerAI</h2><br>" + data;
+
+        const closeButton = document.createElement('button');
+        closeButton.innerText = 'x';
+        Object.assign(closeButton.style, {
+            position: 'absolute',
+            top: '-17.5px',
+            left: '-17.5px',
+            background: 'transparent',
+            border: 'none',
+            fontSize: '25px',
+            fontweight: 'bold',
+            cursor: 'pointer'
+        });
+
+        closeButton.addEventListener('click', () => {
+            newDiv.remove();
+        });
+
+        newDiv.appendChild(closeButton);
+
+        document.body.appendChild(newDiv);
     })
     .catch((error) => {
         console.error('Error:', error);

@@ -9,10 +9,6 @@
             "js": ["scripts/content.js"]
         }
     ],
-    "action": {
-        "default_popup": "scripts/content.html",
-        "default_title": "News Checker"
-    },
     "permissions": [
         "activeTab"
     ]

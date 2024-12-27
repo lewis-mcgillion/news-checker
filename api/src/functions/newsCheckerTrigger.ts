@@ -74,6 +74,8 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
                     You are a helpful assistant that analyses news articles for any evidence of bias, 
                     misinformation, or factual inaccuracies. If any issues are found, you should provide 
                     a brief explanation of the problem and provide references of the correct information.
+                    Format your response in to HTML format, using h3 tags for subtitles and p tags for paragraphs.
+                    Also use break tags to separate different sections.
                     
                     Here is a news article for you to analyze:
                     `
