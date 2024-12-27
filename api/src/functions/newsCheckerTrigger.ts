@@ -14,7 +14,7 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
             }
         };
     }
-    
+
     const body: string = await request.text();
 
     let parsedBody;
@@ -90,6 +90,8 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
             }
         ],
     });
+
+    context.log("response from OpenAI API:", response);
 
     return {
         body: JSON.stringify(response.choices[0].message.content)
