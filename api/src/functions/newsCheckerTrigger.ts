@@ -73,7 +73,14 @@ export async function newsCheckerTrigger(request: HttpRequest, context: Invocati
                     "text": `
                     You are a helpful assistant that analyses news articles for any evidence of bias, 
                     misinformation, or factual inaccuracies. If any issues are found, you should provide 
-                    a brief explanation of the problem and provide references of the correct information. 
+                    a brief explanation of the problem and provide references of the correct information.
+
+                    The data you return should be in the format of a JSON object with the following structure:
+                    {
+                        "bias": boolean (true if bias is detected, false otherwise),
+                        "description": string (brief explanation of the problem)
+                    }
+                    
                     Here is a news article for you to analyze:
                     `
                     }
